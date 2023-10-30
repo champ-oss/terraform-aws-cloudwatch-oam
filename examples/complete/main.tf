@@ -1,3 +1,8 @@
+module "this" {
+  source             = "../../"
+}
+
+/*
 data "aws_caller_identity" "current" {}
 
 # create in monitoring account
@@ -14,3 +19,4 @@ module "link" {
   sink_identifier    = module.sink.sink_id
   depends_on         = [module.sink]
 }
+*/
