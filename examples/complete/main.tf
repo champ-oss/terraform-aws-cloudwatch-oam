@@ -1,23 +1,16 @@
-data "aws_vpcs" "this" {
-  tags = {
-    purpose = "vega"
-  }
-}
+data "aws_caller_identity" "current" {}
 
-data "aws_subnets" "this" {
-  tags = {
-    purpose = "vega"
-    Type    = "Private"
-  }
-
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpcs.this.ids[0]]
-  }
-}
-
-module "this" {
+# create in monitoring account
+module "sink" {
   source             = "../../"
-  private_subnet_ids = data.aws_subnets.this.ids
-  vpc_id             = data.aws_vpcs.this.ids[0]
+  enable_cw_oam_sink = true
+  source_accounts    = data.aws_caller_identity.current.account_id
+}
+
+# create in cloudwatch source account
+module "link" {
+  source             = "../../"
+  enable_cw_oam_link = true
+  sink_identifier    = module.sink.sink_id
+  depends_on         = [module.sink]
 }
