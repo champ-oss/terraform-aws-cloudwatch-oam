@@ -43,6 +43,7 @@ variable "enable_cw_oam_sink" {
 variable "sink_identifier" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/oam_link#sink_identifier"
   type        = string
+  default     = ""
 }
 
 variable "label_template" {
