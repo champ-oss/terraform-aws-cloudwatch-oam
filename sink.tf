@@ -11,16 +11,16 @@ resource "aws_oam_sink_policy" "this" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action   = ["oam:CreateLink", "oam:UpdateLink"]
-        Effect   = "Allow"
-        Resource = "*"
+        Action    = ["oam:CreateLink", "oam:UpdateLink"]
+        Effect    = "Allow"
+        Resource  = "*"
         Principal = "*"
         Condition = {
           "ForAllValues:StringEquals" = {
             "oam:ResourceTypes" = var.resource_types
           }
           "ForAnyValue:StringEquals" = {
-                   "aws:PrincipalOrgID" = var.principal_org_ids
+            "aws:PrincipalOrgID" = var.principal_org_ids
           }
         }
       }
