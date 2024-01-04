@@ -16,8 +16,8 @@ variable "git" {
   default     = "terraform-aws-cloudwatch-oam"
 }
 
-variable "source_accounts" {
-  description = "Accounts that are sharing data with this monitoring account."
+variable "principal_org_ids" {
+  description = "org ids that will be allowed to send log and metric resources to monitoring account"
   type        = list(string)
   default     = []
 }

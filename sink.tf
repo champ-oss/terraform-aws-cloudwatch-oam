@@ -14,12 +14,13 @@ resource "aws_oam_sink_policy" "this" {
         Action   = ["oam:CreateLink", "oam:UpdateLink"]
         Effect   = "Allow"
         Resource = "*"
-        Principal = {
-          "AWS" = var.source_accounts
-        }
+        Principal = "*"
         Condition = {
           "ForAllValues:StringEquals" = {
             "oam:ResourceTypes" = var.resource_types
+          }
+          "ForAnyValue:StringEquals" = {
+                   "aws:PrincipalOrgID" = var.principal_org_ids
           }
         }
       }
