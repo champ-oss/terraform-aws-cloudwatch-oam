@@ -9,7 +9,7 @@ data "aws_caller_identity" "current" {}
 module "sink" {
   source             = "../../"
   enable_cw_oam_sink = true
-  source_accounts    = data.aws_caller_identity.current.account_id
+  principal_org_ids    = "o-example123"
 }
 
 # create in cloudwatch source account
